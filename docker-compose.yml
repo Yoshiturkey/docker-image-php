@@ -1,0 +1,34 @@
+version: "3.7"
+services:
+  nginx:
+    container_name: sirius
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./html:/var/www/html
+      - ./conf/nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - unimatrix-zero
+  php:
+    image: staydaybreak/php:latest
+    volumes:
+      - ./html:/var/www/html
+      - ./conf/php/php.ini:/usr/local/etc/php/php.ini
+    container_name: vega
+    networks:
+      - unimatrix-zero
+  redis:
+    image: redis
+    container_name: altair
+    networks:
+      - unimatrix-zero
+    volumes:
+      - redisdb:/data
+      
+networks: 
+  unimatrix-zero:
+    external: true
+volumes:
+  redisdb:
+    driver: local
