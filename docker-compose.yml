@@ -11,7 +11,7 @@ services:
     networks:
       - unimatrix-zero
   php:
-    image: staydaybreak/php:latest
+    image: asia.gcr.io/staydaybreak-1470451989658/php
     volumes:
       - ./html:/var/www/html
       - ./conf/php/php.ini:/usr/local/etc/php/php.ini
