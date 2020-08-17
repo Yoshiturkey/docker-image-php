@@ -6,15 +6,16 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./html:/var/www/html
       - ./conf/nginx/conf.d:/etc/nginx/conf.d
     networks:
       - unimatrix-zero
+    environment:
+      - TZ=Asia/Tokyo
   php:
     image: asia.gcr.io/staydaybreak-1470451989658/php
     volumes:
-      - ./html:/var/www/html
-      - ./conf/php/php.ini:/usr/local/etc/php/php.ini
+      - ./web:/var/www/html
+    # - ./conf/php/php.ini:/usr/local/etc/php/php.ini
     container_name: vega
     networks:
       - unimatrix-zero
@@ -25,8 +26,8 @@ services:
       - unimatrix-zero
     volumes:
       - redisdb:/data
-      
-networks: 
+
+networks:
   unimatrix-zero:
     external: true
 volumes:
